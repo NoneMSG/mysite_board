@@ -33,43 +33,37 @@
 					<c:forEach items="${blist }" var="bvo" varStatus="status">		
 					<tr>
 						<td>[${status.count }]</td>
-						<td class="left">
-							<a href="${pageContext.servletContext.contextPath }/board?a=viewform&bno=${bvo.no}">${bvo.title }</a>
-						</td>
-						<td>${authUser.name }</td>
+						<c:choose>
+							<c:when test="${bvo.depth > 0 }">
+								<td class="left" style="padding-left:${20*bvo.depth }px">
+									<img src="${pageContext.servletContext.contextPath }/assets/images/reply.png">
+									<a href="${pageContext.servletContext.contextPath }/board?a=viewform&bno=${bvo.no}">${bvo.title }</a>
+								</td>	
+							</c:when>
+							<c:otherwise>
+								<td class="left">
+								<a href="${pageContext.servletContext.contextPath }/board?a=viewform&bno=${bvo.no}">${bvo.title }</a>
+								</td>
+							</c:otherwise>
+						</c:choose>
+						<td>${bvo.userName }</td>
 						<td>${bvo.hit }</td>
 						<td>${bvo.regDate }</td>
-						<td><form></form></td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					</c:forEach>
-					
-					<tr>
-						<td>3</td>
-						<td class="left" style="padding-left:${vo.depth * 20 }px">
-							<img src="${pageContext.request.contextPath }/assets/images/reply.png">
-							<a href="">두 번째 글의 답글 입니다.</a>
-						</td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-02 12:04:12</td>
 						<td>
-							<a href="" class="del">삭제</a>
-						</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td class="left" style="padding-left:40px">
-							<img src="${pageContext.request.contextPath }/assets/images/reply.png">
-							<a href="">답글의 답글 입니다.</a>
-						</td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-02 12:04:12</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					
+							<c:choose>
+								<c:when test="${not empty authUser && authUser.no == bvo.userNo}">
+									<a href="${pageContext.servletContext.contextPath }/board?a=delete&bno=${bvo.no}" class="del">삭제</a>
+								
+								</c:when>
+								<c:otherwise>
+									 &nbsp;
+								</c:otherwise>
+							</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
 				</table>
+				
 				<div class="pager">
 					<ul>
 						<li><a href="">◀</a></li>

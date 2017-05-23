@@ -14,8 +14,11 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form class="board-form" name="writeForm" method="post" action="${pageContext.servletContext.contextPath }/board">
+				<form class="board-form" name="writeForm" method="post" action="${pageContext.servletContext.contextPath }/board?groupNo=${replyVo.groupNo}">
 					<input type = "hidden" name = "a" value="write">
+					<input type ="hidden" name ="gno" value="${replyVo.groupNo }"/>
+					<input type ="hidden" name ="ono" value="${replyVo.orderNo }"/> 
+					<input type ="hidden" name ="depth" value="${replyVo.depth }"/> 
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
