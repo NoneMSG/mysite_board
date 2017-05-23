@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.jx372.mysite.action.user.UserActionFactory;
 import com.jx372.web.action.Action;
 
-@WebServlet("/user")
+//@WebServlet("/user")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -20,7 +20,7 @@ public class UserServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding( "UTF-8" );
+		//request.setCharacterEncoding( "UTF-8" );
 		String actionName = request.getParameter( "a" );
 		Action action = 
 				new UserActionFactory().getAction( actionName );
