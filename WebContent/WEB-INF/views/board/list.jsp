@@ -86,4 +86,43 @@
 		<c:import url="/WEB-INF/views/include/footer.jsp" />
 	</div>
 </body>
+<!-- <div class="pager">
+					<ul>
+						<c:if test="${prevPage > 0 }" >
+							<li><a href="${pageContext.request.contextPath }/board?p=${prevPage }&kwd=${keyword }">◀</a></li>
+						</c:if>
+						
+						<c:forEach begin="${beginPage }" end="${beginPage + listSize - 1 }" var="page">
+							<c:choose>
+								<c:when test="${endPage < page }">
+									<li>${page }</li>
+								</c:when> 
+								<c:when test="${currentPage == page }">
+									<li class="selected">${page }</li>
+								</c:when>
+								<c:otherwise> 
+									<li><a href="${pageContext.request.contextPath }/board?p=${page }&kwd=${keyword }">${page }</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						
+						<c:if test="${nextPage > 0 }" >
+							<li><a href="${pageContext.request.contextPath }/board?p=${nextPage }&kwd=${keyword }">▶</a></li>
+						</c:if>	
+					</ul>
+				</div>				
+				<div class="bottom">
+					<c:if test="${not empty authUser }">
+						<a href="${pageContext.request.contextPath }/board?a=writeform" id="new-book">글쓰기</a>
+					</c:if>
+				</div>
+			</div>
+		</div>
+		<c:import url="/WEB-INF/views/include/navigation.jsp">
+			<c:param name="menu" value="board"/>
+		</c:import>
+		<c:import url="/WEB-INF/views/include/footer.jsp" />
+	</div>
+</body>
+</html> -->
 </html>

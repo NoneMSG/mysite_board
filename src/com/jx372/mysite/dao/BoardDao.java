@@ -307,7 +307,7 @@ public class BoardDao {
 		}
 	}
 	
-public boolean insert( BoardVo vo ) {
+	public boolean insert( BoardVo vo ) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -360,6 +360,53 @@ public boolean insert( BoardVo vo ) {
 		}
 		
 		return false;
+	}
+	
+	public int getTotalCount( String keyword ) {
+		int totalCount = 0;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			if( "".equals( keyword ) ) {
+				String sql = "select count(*) from board";
+				pstmt = conn.prepareStatement(sql);
+			} else { 
+				String sql =
+					"select count(*)" +
+					"  from board" +
+					" where title like ? or content like ?";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, "%" + keyword + "%");
+				pstmt.setString(2, "%" + keyword + "%");
+			}
+			rs = pstmt.executeQuery();
+			if( rs.next() ) {
+				totalCount = rs.getInt( 1 );
+			}
+		} catch (SQLException e) {
+			System.out.println( "error:" + e );
+		} finally {
+			try {
+				if( rs != null ) {
+					rs.close();
+				}
+				if( pstmt != null ) {
+					pstmt.close();
+				}
+				if( conn != null ) {
+					conn.close();
+				}
+			} catch ( SQLException e ) {
+				System.out.println( "error:" + e );
+			}  
+		}
+		
+		return totalCount;
 	}
 	
 	
